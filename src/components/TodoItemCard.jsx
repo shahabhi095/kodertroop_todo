@@ -14,7 +14,7 @@ import {
 const TodoItemCard = ({ el, HandleDelete, HandleChange }) => {
   const { title, description, _id, status } = el;
   return (
-    <Card p={2} mt={1} w={"280px"}>
+    <Card p={2} mt={1} w={"300px"}>
       <CardHeader p={2}>
         <Heading size="md">{title}</Heading>
       </CardHeader>
