@@ -2,7 +2,7 @@
 
 # Backend deployed link
 
-URL = https://your-todo-3me4.onrender.com/
+URL = https://your-todo-w2x0.onrender.com/
 
 GET:"URL/api/todo"
 
