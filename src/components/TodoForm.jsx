@@ -18,6 +18,7 @@ const TodoForm = () => {
   const [todo, setTodo] = useState(initialState);
   const [loader, setLoader] = useState(false);
   const toast = useToast();
+  
   const HandleSubmit = async (e) => {
     setLoader(true);
     e.preventDefault();

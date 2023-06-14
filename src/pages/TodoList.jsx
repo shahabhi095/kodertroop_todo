@@ -15,22 +15,24 @@ import { AiOutlineSearch } from "react-icons/ai";
 const DisplayTodoList = () => {
   const [searchTodo, setSearch] = useState("");
   const [getTodo, setGetTodo] = useState([]);
- const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
   const toast = useToast();
 
   useEffect(() => {
     GetTodo();
   }, []);
+
   const GetTodo = async () => {
-    setLoader(true)
+    setLoader(true);
     try {
       let res = await axios.get(`https://your-todo-w2x0.onrender.com/api/todo`);
       setGetTodo(res.data);
-      setLoader(false)
+      setLoader(false);
     } catch (err) {
       console.log(err);
     }
   };
+
   const HandleDelete = async (id) => {
     try {
       let res = await axios.delete(
@@ -48,6 +50,7 @@ const DisplayTodoList = () => {
       console.log(err);
     }
   };
+  // HandleChange will change the status of todo
   const HandleChange = async (val) => {
     try {
       let res = await axios.patch(
@@ -66,13 +69,14 @@ const DisplayTodoList = () => {
       console.log(err);
     }
   };
+  
   const HandleSearch = async () => {
-    setLoader(true)
+    setLoader(true);
     try {
       let res = await axios.get(
         `https://your-todo-w2x0.onrender.com/api/todo/search?q=${searchTodo}`
       );
-      setLoader(false)
+      setLoader(false);
       setGetTodo(res.data);
     } catch (err) {
       console.log(err);
@@ -81,6 +85,7 @@ const DisplayTodoList = () => {
 
   return (
     <Box ml={4}>
+      {/*----------- Search section start------------------------ */}
       <Box w={"40%"} m={2} ml={0} display={"flex"}>
         {" "}
         <InputGroup borderColor={"facebook.800"}>
@@ -98,8 +103,17 @@ const DisplayTodoList = () => {
           Search
         </Button>
       </Box>
+      {/*----------- Search section emd------------------------ */}
+
+      {/*----------- Todolist desplay start------------------------ */}
       {loader === true ? (
-        <Box position={"fixed"} w={"15%"} top={"37%"} left={"45%"} borderRadius={"50%"}>
+        <Box
+          position={"fixed"}
+          w={"15%"}
+          top={"37%"}
+          left={"45%"}
+          borderRadius={"50%"}
+        >
           <Image
             borderRadius="50%"
             src="https://i.gifer.com/origin/d3/d3f472b06590a25cb4372ff289d81711_w200.gif"
@@ -108,6 +122,7 @@ const DisplayTodoList = () => {
         </Box>
       ) : (
         <Box display={"flex"} gap={"20px"} justifyContent={"space-betwen"}>
+          {/*-----------Todo pending start------------------------ */}
           <Box bgColor={"#dbdbce"} w={"300px"}>
             <Heading
               fontSize={"18px"}
@@ -129,6 +144,8 @@ const DisplayTodoList = () => {
                 ) : null
               )}
           </Box>
+          {/*-----------Todo pending end------------------------ */}
+          {/*-----------Todo Inprogress start------------------------ */}
           <Box bgColor={"#dbdbce"} w={"300px"}>
             <Heading
               fontSize={"18px"}
@@ -150,6 +167,8 @@ const DisplayTodoList = () => {
                 ) : null
               )}
           </Box>
+          {/*-----------Todo Inprogress end------------------------ */}
+          {/*-----------Todo QA start------------------------ */}
           <Box bgColor={"#dbdbce"} w={"300px"}>
             <Heading
               fontSize={"18px"}
@@ -171,6 +190,8 @@ const DisplayTodoList = () => {
                 ) : null
               )}
           </Box>
+          {/*-----------Todo QA end------------------------ */}
+          {/*-----------Todo Completed start------------------------ */}
           <Box bgColor={"#dbdbce"} w={"300px"}>
             <Heading
               fontSize={"18px"}
@@ -192,8 +213,10 @@ const DisplayTodoList = () => {
                 ) : null
               )}
           </Box>
+          {/*-----------Todo Completed end------------------------ */}
         </Box>
       )}
+      {/*----------- Todolist desplay end------------------------ */}
     </Box>
   );
 };
